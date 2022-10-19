@@ -26,3 +26,18 @@ Any POST web requests will occur in the halopost.py
 Parameters should specifically match the API parameters of Halo itself 
 
 Token will refresh automatically after expiry time using the ClientID/ClientSecret as documented.
+
+### Adding new endpoints
+
+#### GET endpoints
+ - Under the haloget.py add a new function for the new endpoint, include the parameters you want to allow including search strings or specific filtering parameters.
+
+- set the "resource" variable to be the new endpoint you want to hit
+- the parameters should be passed into a dict object (key/value pair) of HaloPSA API expected parameters and values. The python module will convert this automatically into a query string when buidling the web request.
+
+- Note that when returning a list of objects the result will be an array under the "clients" property of a dict object, when returning a single object it'll be by itself.
+
+#### POST endpoints
+- Under the halopost.py add a new function for the endpoint, for a POST the a dict object wrapped into a list should be provided to the function, and the function will pass it onto the Halo POST handler module which will stringify it into JSON and make the web call.
+
+- There are types of post requests, SET and NEW. When using SET the function should validate that an ID item exists so you don't accidentally create duplicates. When using NEW the function should validate no ID exists so you don't overwrite something.
