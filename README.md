@@ -23,9 +23,16 @@ This is a framework design, all web queries get built and passed up the framewor
 Any GET web request will occur in the haloget.py
 Any POST web requests will occur in the halopost.py
 
-Parameters should specifically match the API parameters of Halo itself 
+Parameters should specifically match the API parameters of Halo itself
 
 Token will refresh automatically after expiry time using the ClientID/ClientSecret as documented.
+
+### Supported Endpoints
+
+The module currently implements helper functions for several common Halo API endpoints:
+
+- **GET**: `getclients`, `getusers`, `getagents`, `getassets`, `gettickets`
+- **POST (SET)**: `setclients`, `setusers`, `settickets`
 
 ### Adding new endpoints
 

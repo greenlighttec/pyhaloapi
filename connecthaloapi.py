@@ -57,12 +57,16 @@ def halowebrequest(method,urlpath,postbody=None):
         print(haloResponse.text)
 
 def haloget(resource, query=None):
-    if isinstance(query,dict):
-        query = '&'.join(f'{key}={value}' for key, value in query.items())
+    if isinstance(query, dict) and query:
+        query = '&'.join(
+            f"{key}={'true' if value is True else 'false' if value is False else value}"
+            for key, value in query.items()
+            if value is not None
+        )
         ApiCall = resource + '?' + query
     else:
         ApiCall = resource
-    return halowebrequest('GET',ApiCall)
+    return halowebrequest('GET', ApiCall)
 
 def halopost(resource,data):
     if not isinstance(data,list):
